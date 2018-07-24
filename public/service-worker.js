@@ -1,24 +1,11 @@
-/**
- * Welcome to your Workbox-powered service worker!
- *
- * You'll need to register this file in your web app and you should
- * disable HTTP caching for this file too.
- * See https://goo.gl/nhQhGp
- *
- * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox build configuration
- * and re-run your build process.
- * See https://goo.gl/2aRDsh
- */
-
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
 
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [
+// workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute([
+  {
+    "url": "_service-worker.js",
+    "revision": "f06c8c48de5bc5f1f045643b4161a1db"
+  },
   {
     "url": "_sw.js",
     "revision": "478f479738fb631a34e8ff9de1170170"
@@ -32,12 +19,8 @@ self.__precacheManifest = [
     "revision": "2cab47d9e04d664d93c8d91aec59e812"
   },
   {
-    "url": "help/index.html",
-    "revision": "ec3f1f60a56f0d8c9e62d61d1ea68afa"
-  },
-  {
     "url": "index.html",
-    "revision": "de6f12b4c1b2e98ffbaf1ffb4bed9d92"
+    "revision": "a1ae16509b4f995b38ee3a6b1191cc33"
   },
   {
     "url": "manifest.json",
@@ -140,6 +123,10 @@ self.__precacheManifest = [
     "revision": "0f282d64b0fb306daf12050e812d6a19"
   },
   {
+    "url": "src/images/splash-page.jpg",
+    "revision": "92de20b95bf4404511fa519d647f5ffb"
+  },
+  {
     "url": "src/js/app.js",
     "revision": "17d0fcc0653795cd01bbe20c7dba5274"
   },
@@ -166,7 +153,10 @@ self.__precacheManifest = [
   {
     "url": "src/js/utility.js",
     "revision": "4853a87685922cdf08b8bc5ed3f6f85e"
+  },
+  {
+    "url": "sw-base.js",
+    "revision": "01553cc0fd3efc4bc09a9af93e7bec41"
   }
-].concat(self.__precacheManifest || []);
-workbox.precaching.suppressWarnings();
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+]);
+
