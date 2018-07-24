@@ -1,11 +1,11 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js")
 
-// workbox.precaching.suppressWarnings();
+workbox.routing.registerRoute(new RegExp(/.*(?:googleapis|gstatic)\.com.*$/), workbox.strategies.staleWhileRevalidate({
+  cacheName: 'google-fonts'
+}))
+workbox.routing.registerRoute(new RegExp('/images/'), workbox.strategies.cacheFirst({cacheName: 'image-cache'}))
+
 workbox.precaching.precacheAndRoute([
-  {
-    "url": "_service-worker.js",
-    "revision": "f06c8c48de5bc5f1f045643b4161a1db"
-  },
   {
     "url": "_sw.js",
     "revision": "478f479738fb631a34e8ff9de1170170"
@@ -156,7 +156,6 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "sw-base.js",
-    "revision": "01553cc0fd3efc4bc09a9af93e7bec41"
+    "revision": "5edbbae973b25544c697a61d86068206"
   }
-]);
-
+])
