@@ -1,4 +1,6 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js")
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js')
+importScripts('src/js/idb.js')
+importScripts('src/js/utility.js')
 
 workbox.routing.registerRoute(new RegExp(/.*(?:googleapis|gstatic)\.com.*$/), workbox.strategies.staleWhileRevalidate({
   cacheName: 'google-fonts',
@@ -11,14 +13,39 @@ workbox.routing.registerRoute(new RegExp(/.*(?:googleapis|gstatic)\.com.*$/), wo
     })
   ]
 }))
+
 workbox.routing.registerRoute(
   "https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css",
   workbox.strategies.staleWhileRevalidate({
     cacheName: 'material-css'
   }))
+
 workbox.routing.registerRoute(new RegExp(/.*firebasestorage\.googleapis\.com.*$/), workbox.strategies.staleWhileRevalidate({
   cacheName: 'post-images'
 }))
+
+workbox.routing.registerRoute(
+  "https://pwagram-99adf.firebaseio.com/subscriptions.json",
+  function (args) {
+    return fetch(args.event.request)
+      .then(function (res) {
+        var clonedRes = res.clone()
+        
+        clearAllData('posts')
+          .then(function () {
+            return clonedRes.json()
+          })
+          .then(function (data) {
+            for (var key in data) {
+              writeData('posts', data[key])
+            }
+          })
+        
+        return res
+      })
+  }
+)
+
 workbox.routing.registerRoute(new RegExp('/images/'), workbox.strategies.cacheFirst({cacheName: 'image-cache'}))
 
 workbox.precaching.precacheAndRoute([
@@ -172,6 +199,6 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "sw-base.js",
-    "revision": "40bf55cc47472ab25c55b1710a926c29"
+    "revision": "e42e2b95eaaba2c64598609ce8e60ebb"
   }
 ])
