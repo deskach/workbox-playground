@@ -6,7 +6,7 @@
   "scripts": {
     "start": "http-server -c-1",
     "generate-sw": "workbox generateSW",
-    "inject-manifest": "workbox injectManifest --swSrc=\"public/sw-base.js\""
+    "inject-manifest": "workbox injectManifest --swSrc"
   },
   "keywords": [
     "pwa",
